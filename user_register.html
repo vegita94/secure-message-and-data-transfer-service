@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>User Register page</title>
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+	 <link href="resources/css_basic.css" rel="stylesheet">
+
+    <style type="text/css">
+	   </style>
+
+</head>
+
+<body>
+
+    <div id="header">
+        <img id="logo" src="images/gmail.png">
+        <h2 id="logo-text"> &nbsp; Encrypted Mail Service</h2>
+    </div>
+
+    <div id="body">
+	    <div class="content">
+            <form name="uregister" method="POST" action="mail.html" ">
+
+                <input type="text" class="textbox" id="u_username" name="username" placeholder="Enter username" style="margin-left:150px;"/>
+
+                <input type="text" name="u_pwd"  id="u_pwd" placeholder="Enter Password" class="textbox" style="margin-left:150px;"/>
+                
+				<input type="text" name="u_repwd" id="u_repwd" placeholder="Re-nter Password" class="textbox" style="margin-left:150px;"/>
+				
+                <input type="text" name="email" placeholder="Enter email" class="textbox"  style="margin-left:150px;"/>
+                
+				<select name="s_ques" id="u_s_ques" style="width:45em; display:block; margin-left:150px; margin-top:8px;">
+                    	<option disabled selected>--Select a security question!--</option>
+                        <option>What was the first book i ever read?</option>
+                        <option>What was the first company i ever worked for?</option>
+                        <option>What is my partner's middle name?</option>
+                        <option>What is the first name of my oldest cousin?</option>
+                    
+                    </select>
+				<input type="text" name="answ" id="answ" placeholder="Enter your answer" class="textbox"  style="margin-left:150px;"/>
+                <!--  <input id="send" type="image" src="images/send.png" onclick="sub()"> -->
+                <input type="image" src="images/send.png" id="send" onclick="return check()">
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>This is a demo encrypted messaging service , Data Encryption Standard :-) </p>
+        <!-- end .footer -->
+    </div>
+	
+	<script>
+	    function sub() {
+            var message = document.getElementById("textarea_style").value;
+            var key = rs;
+            message = message.replace(/(\r\n|\n|\r)/gm," ");
+
+            var enc_msg=hello(message, key);
+            document.getElementById("enc").value=enc_msg;
+
+            document.uregister.submit();
+        }
+		function check()
+		{
+		
+		 if(document.uregister.u_username.value=="")
+		   {
+			alert('Please Enter a  New UserName ');
+			return false;	
+		   }
+		   
+		  var username=/^[a-zA-Z0-9]{1,}$/;
+		  if(!document.uregister.u_username.value.match(username))
+		  {
+			alert('Enter valid UserName');
+			return false;	
+		  } 
+          if(document.uregister.u_pwd.value=="")
+		  {
+			alert('Please Enter a New Password');
+			return false;	
+		  }
+		  var name=/^[a-zA-Z!@#$%^&*0-9]{8,15}$/;
+		  if(!document.uregister.u_pwd.value.match(name))
+		  {
+			alert('Enter valid Password(Have atleast one a-z,one A-Z,one 0-9 )');
+			return false;	
+		  }
+		  if(document.uregister.u_repwd.value=="")
+		  {
+			alert('Please Re-Enter the Password');
+			return false;	
+		  }
+	      var name=/^[a-zA-Z!@#$%^&*0-9]{8,15}$/;
+		  if(!document.uregister.u_repwd.value.match(name))
+		  {
+			alert('Enter valid Password(Have 8-15 characters, atleast one a-z,one A-Z,one 0-9 and one (!@#$%^&*))');
+			return false;	
+		  }
+          if(document.uregister.u_repwd.value!=document.uregister.u_pwd.value)
+		   {
+			alert('Your Password Doesnot Match');
+			return false;
+		   }   	
+		   if(document.uregister.u_s_ques.value=="--Select a security question!--"){
+			alert('Please Choose your Question');
+			return false;	
+		}
+		if(document.uregister.answ.value==""){
+			alert('Please Enter your Answer');
+			return false;	
+		}
+		else
+		{
+		  sub();
+		}
+		
+		}   
+	</script>

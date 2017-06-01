@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Compose mail</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+    <script type="text/javascript" src="resources/enc_key.js"></script>
+    <link href="resources/css_basic.css" rel="stylesheet">
+
+    <style type="text/css">
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="header">
+        <img id="logo" src="images/gmail.png">
+        <h2 id="logo-text"> &nbsp; Encrypted Mail Service</h2>
+    </div>
+
+    <div id="body">
+        <div class="sidebar1">
+            <ul class="nav">
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">Sent Mails</a></li>
+            </ul>
+            <!-- end .sidebar1 -->
+        </div>
+        <div class="content">
+            <form name="myform" method="POST" action="mail_process.php" onsubmit="sub();">
+
+                <input type="text" class="textbox" name="To" placeholder="Enter email" />
+
+                <input type="text" name="Subject" placeholder="Enter subject" class="textbox" />
+
+                <input type="text" name="key" placeholder="key" id="key" class="textbox" hidden="hidden" />
+
+                <textarea id="textarea_style" name="message"></textarea>
+                <input type="text" name="enc_msg" class="textbox" id="enc" hidden="hidden"  />
+
+                <!--  <input id="send" type="image" src="images/send.png" onclick="sub()"> -->
+                <input type="image" src="images/send.png" id="send" onclick="sub()">
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>This is a demo encrypted messaging service , Data Encryption Standard :-) </p>
+        <!-- end .footer -->
+    </div>
+    <!-- end .container -->
+
+
+    <script>
+        var random = function(length) {
+            var text = "";
+            var possible = "ABCDEF0123456789";
+            for (var i = 0; i < length; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        }
+        var rs = random(16);
+
+        document.getElementById("key").value = rs;
+
+        function sub() {
+            var message = document.getElementById("textarea_style").value;
+            var key = rs;
+            message = message.replace(/(\r\n|\n|\r)/gm," ");
+
+            var enc_msg=hello(message, key);
+            document.getElementById("enc").value=enc_msg;
+
+            document.myform.submit();
+        }
+
+    </script>
+</body>
+
+</html>
